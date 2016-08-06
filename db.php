@@ -1,6 +1,6 @@
 <?php
 
-$servername = "ec2-52-37-193-247.us-west-2.compute.amazonaws.com";
+$servername = "localhost";
 $username = "root";
 $password = "rp2016";
 
