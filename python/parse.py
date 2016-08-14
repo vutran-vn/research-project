@@ -4,6 +4,7 @@ import datetime
 import glob
 import filecmp
 import os
+import re
 from bs4 import BeautifulSoup
 
 now = datetime.datetime.now().strftime("%Y-%m-%d-%H-%M-%S")
@@ -118,5 +119,23 @@ for link in links:
     except:
         pass
 
+# satisfaction (star)
+# Trick: skip the last one, which is the default value '100%'
+# for index in range(len(soup.find_all("div", {"class": "stars-container"})) -1 ):
+#     satisfaction = re.findall(r"[0-9.%]+", soup.find_all("div", {"class": "stars-container"})[index].find_all("div", {"class": "stars on"})[0].get('style'))[0]
+#     if index == 0:
+#         print ('Total satisfaction: ' + satisfaction)
+#     else:
+#         print ('Each satisfaction: ' + satisfaction)
+
 # review
-# soup.find_all("p", {"class": "review-text"})[0].text, soup.find_all("p", {"class": "review-text"})[1].text ...
+# for index in range(len(soup.find_all("p", {"class": "review-text"}))):
+#    print (soup.find_all("p", {"class": "review-text"})[index].text)
+
+# review author
+# soup.find_all("p", {"class": "review-author"})[0].text
+# 'Nathan Glover from University of Birmingham'
+
+# datePublished
+# soup.find_all("p", {"class": "review-author"})[1].text
+# 'Thursday, October 22, 2015'
