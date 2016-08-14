@@ -79,7 +79,44 @@ if len(glob.glob('*[0-9]*.txt')) == 2:
 # Second layer: e.g. http://www.serchen.co.uk/category/appointments-scheduling/
 # Purpose:  List this category name, service urls, names, listed date, star and the number of reviews
 ##########################################################################################################################################
-##########################################################################################################################################
-# Third layer:  e.g. http://www.serchen.co.uk/company/3sixtylite/
-# Purpose:  List the category name, the service url on serchen.co.uk, url, the service official site, stars, detailed reviews, and the date of comments
-##########################################################################################################################################
+print ('Second layer scanning ...')
+latest_category_list_file = glob.glob('*[0-9]*.txt')[0]
+
+#with open(latest_category_list_file) as f:
+#    for line in f:
+#        latest_category_url = line.split(',')[0].rstrip('\n')
+#        latest_category_name = line.split(',')[1].rstrip('\n')
+#        print ('Entering ' + latest_category_url + ' ...')
+#        r_category = requests.get(latest_category_url)
+#        soup = BeautifulSoup(r_category.content, "html.parser")
+
+# Test with single category website
+latest_category_url = 'http://www.serchen.co.uk/category/appointments-scheduling/'
+r_category = requests.get(latest_category_url)
+soup = BeautifulSoup(r_category.content, "html.parser")
+# "campany-tile" needs to be detected dynamically in the future.
+links = soup.find_all("div", {"class": "company-tile"})
+for link in links:
+    try:
+        # Not the official website here.
+        company_url_at_serchen = url_main + link.contents[0].get('href')
+        ##########################################################################################################################################
+        # Third layer:  e.g. http://www.serchen.co.uk/company/3sixtylite/
+        # Purpose:  List the category name, the service url on serchen.co.uk, url, the service official site, stars, detailed reviews, and the date of comments
+        ##########################################################################################################################################
+        print ('Entering ' + company_url_at_serchen + ' ...')
+        # Test with single company website
+        r_company = requests.get('http://www.serchen.co.uk/company/bookingbug/')
+        #r_company = requests.get(company_url_at_serchen)
+        soup = BeautifulSoup(r_company.content, "html.parser")
+        links = soup.find_all("div", {"itemscope": "itemtype"})
+        for link in links:
+            try:
+                print (link)
+            except:
+                pass
+    except:
+        pass
+
+# review
+# soup.find_all("p", {"class": "review-text"})[0].text, soup.find_all("p", {"class": "review-text"})[1].text ...
