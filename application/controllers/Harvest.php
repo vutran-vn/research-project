@@ -18,7 +18,8 @@ class Harvest extends CI_Controller {
     public function parse() {
         $website_url = $this->input->post('website-url');
         if($website_url != null && !empty($website_url)) {
-            shell_exec('sudo /usr/bin/python27 /var/www/html/application/libraries/python-parse-html/main.py ' . $website_url);
+            $output = shell_exec('sudo /usr/bin/python27 /var/www/html/application/libraries/python-parse-html/main.py ' . $website_url);
+            echo $output;
         }
     }
 
