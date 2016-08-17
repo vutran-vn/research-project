@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 import sys
 
 website_url = sys.argv[1]

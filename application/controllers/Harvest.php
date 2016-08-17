@@ -18,9 +18,7 @@ class Harvest extends CI_Controller {
     public function parse() {
         $website_url = $this->input->post('website-url');
         if($website_url != null && !empty($website_url)) {
-            //$exec = 'python ' . realpath(base_url('/application/libraries/python-parse-html/main.py')) . ' ' . $website_url;
-            echo 'sudo /usr/bin/python27 ' . '/var/www/html/application/libraries/python-parse-html/main.py ' . $website_url;
-            system('sudo /usr/bin/python27 ' . '/var/www/html/application/libraries/python-parse-html/main.py ' . $website_url);
+            shell_exec('/var/www/html/application/libraries/python-parse-html/main.py ' . $website_url);
         }
     }
 
