@@ -19,7 +19,7 @@ class Harvest extends CI_Controller {
         $website_url = $this->input->post('website-url');
         if($website_url != null && !empty($website_url)) {
             //$exec = 'python ' . realpath(base_url('/application/libraries/python-parse-html/main.py')) . ' ' . $website_url;
-            exec('python sudo ' . '/var/www/html/application/libraries/python-parse-html/main.py ' . $website_url);
+            exec('sudo python ' . '/var/www/html/application/libraries/python-parse-html/main.py ' . $website_url);
         }
     }
 
