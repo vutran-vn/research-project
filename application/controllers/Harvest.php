@@ -14,14 +14,23 @@ class Harvest extends CI_Controller {
         $this->load->view('home');
         $this->load->view('footer');
     }
-    
+
     public function parse() {
         $website_url = $this->input->post('website-url');
-        if($website_url != null && !empty($website_url)) {
-            $output = shell_exec("sudo python --version");
-//            $output = shell_exec('sudo /usr/bin/python27 /var/www/html/application/libraries/python-parse-html/main.py ' . $website_url);
-            echo $output;
+        if ($website_url != null && !empty($website_url)) {
+            //These lines of code are for temporary developing purpose
+            //The real code here should be execute the Python script with appropriate "website_url" which is the input from user
+            if ($website_url == "http://www.serchen.co.uk/browse/") {
+                $json = file_get_contents(base_url() . 'python/JSON/categories');
+                $data['categories'] = json_decode($json, true);
+                $data['website_url'] = $website_url;
+            }
         }
+
+        $data['title'] = "Harvesting Web App";
+        $this->load->view('header', $data);
+        $this->load->view('parse', $data);
+        $this->load->view('footer');
     }
 
 }
