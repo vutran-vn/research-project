@@ -1,0 +1,28 @@
+body {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 10px;
+}
+#harvest-website {
+    padding: 20px;
+}
+#config-website {
+    padding: 10px;
+    border: 1px solid gray;
+    border-radius: 10px;
+}
+#config-website input[type="text"] {
+    width: 100%;
+}
+#config-website .pages {
+    margin-top: 10px;
+}
+#config-website .panel-heading, #config-website .panel-body {
+    padding: 8px;
+}
+#config-website .panel.panel-default {
+    margin-bottom: 0;
+}
+#config-website table {
+    margin: 0;
+}
