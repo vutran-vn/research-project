@@ -24,6 +24,7 @@ class Config extends CI_Controller {
 
     public function addPage() {
         $data['page_index'] = $this->input->post('pageIndex');
+        header('Access-Control-Allow-Origin: *');
         $this->load->view('config-page', $data);
     }
 }
