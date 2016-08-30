@@ -14,7 +14,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         <input type="text" name="website_url" value="<?= $custom_config['website_url'] ?>">
                     </div>
                     <div class="col-md-2">
-                        <button type="button" class="btn btn-xs btn-success btn-add-page">Add page</button>
+                        <button type="button" class="btn btn-xs btn-success btn-add-page" onclick="addPage()">Add page</button>
                     </div>
                 </div>
             </div>
@@ -27,7 +27,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 foreach ($custom_config['pages'] as $page) {
                     $page_index++;
                     ?>
-                    <div class="page panel panel-success">
+                    <div class="page page-<?= $page_index ?> panel panel-success" data-page-index="<?= $page_index ?>">
                         <div class="panel-heading">
                             <div class="row">
                                 <div class="col-md-2">
@@ -38,8 +38,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                     <input type="text" name="page_url" value="<?= $page['url'] ?>">
                                 </div>
                                 <div class="col-md-4">
-                                    <button type="button" class="btn btn-xs btn-danger btn-remove-object">Remove</button>
-                                    <button type="button" class="btn btn-xs btn-success btn-add-object">Add object</button>
+                                    <button type="button" class="btn btn-xs btn-danger btn-remove-page" data-page-index="<?= $page_index ?>" onclick="removePage(this)">Remove</button>
+                                    <button type="button" class="btn btn-xs btn-success btn-add-object" data-page-index="<?= $page_index ?>" onclick="addObject(this)">Add object</button>
                                 </div>
                             </div>
                         </div>
@@ -54,8 +54,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                                     <input type="text" name="object_name" value="<?= $object['name'] ?>">
                                                 </div>
                                                 <div class="col-md-4">
-                                                    <button type="button" class="btn btn-xs btn-danger btn-remove-object">Remove</button>
-                                                    <button type="button" class="btn btn-xs btn-success btn-add-attribute">Add attribute</button>
+                                                    <button type="button" class="btn btn-xs btn-danger btn-remove-object" onclick="removeObject(this)">Remove</button>
+                                                    <button type="button" class="btn btn-xs btn-success btn-add-attribute" onclick="addAttribute(this)">Add attribute</button>
                                                 </div>
                                             </div>
                                         </div>
@@ -69,6 +69,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                                                 <th>Attribute Name</th>
                                                                 <th>Attribute Sample</th>
                                                                 <th>Action</th>
+                                                                <th>Update</th>
                                                             </tr>
                                                         </thead>
                                                         <tbody>
@@ -76,7 +77,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                                                 <tr>
                                                                     <td><input type="text" name="attribute_name" value="<?= $attr['name'] ?>"></td>
                                                                     <td><input type="text" name="attribute_sample" value="<?= $attr['sample'] ?>"></td>
-                                                                    <td><button type="button" class="btn btn-xs btn-danger btn-remove-atribute">Remove</button></td>
+                                                                    <td><button type="button" class="btn btn-xs btn-danger btn-remove-attribute" onclick="removeAttribute(this)">Remove</button></td>
+                                                                    <td><input type="checkbox" value="get-updated" checked="checked"/></td>
                                                                 </tr>
                                                             <?php } ?>
                                                         </tbody>
@@ -94,7 +96,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 ?>
             </div>
             <hr>
-            <input type="submit" class="btn btn-success" value="Save"/>
+            <div>
+                <button type="submit" class="btn btn-success">Save</button>
+                <button type="button" class="btn btn-default">Get updated</button>
+            </div>
         </form>
     </div>
 </div>

@@ -1,8 +1,7 @@
-<?php
-
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+<tr>
+    <td><input type="text" name="attribute_name" value=""></td>
+    <td><input type="text" name="attribute_sample" value=""></td>
+    <td><button type="button" class="btn btn-xs btn-danger btn-remove-attribute" onclick="removeAttribute(this)">Remove</button></td>
+    <td><input type="checkbox" value="get-updated" checked="checked"/></td>
+</tr>
 

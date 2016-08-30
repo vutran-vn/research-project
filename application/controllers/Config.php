@@ -27,4 +27,14 @@ class Config extends CI_Controller {
         header('Access-Control-Allow-Origin: *');
         $this->load->view('config-page', $data);
     }
+    
+    public function addObject() {
+        header('Access-Control-Allow-Origin: *');
+        $this->load->view('config-object');
+    }
+    
+    public function addAttribute() {
+        header('Access-Control-Allow-Origin: *');
+        $this->load->view('config-attribute');
+    }
 }
