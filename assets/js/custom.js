@@ -47,5 +47,14 @@ function removeAttribute(el) {
     }
 }
 $(document).ready(function () {
+    $('.btn-get-update').on('click', function () {
+        $.ajax({
+            url: $('#base_url').text() + "/index.php/harvest/getData",
+            type: "post",
+            success: function (data) {
+                alert(data);
+            }
+        });
+    });
 });
 

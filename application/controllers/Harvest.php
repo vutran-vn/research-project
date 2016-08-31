@@ -32,5 +32,9 @@ class Harvest extends CI_Controller {
         $this->load->view('parse', $data);
         $this->load->view('footer');
     }
+    
+    public function getData() {
+        echo "abc";
+    }
 
 }

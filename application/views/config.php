@@ -98,7 +98,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             <hr>
             <div>
                 <button type="submit" class="btn btn-success">Save</button>
-                <button type="button" class="btn btn-default">Get updated</button>
+                <button type="button" class="btn btn-default btn-get-update">Get updated</button>
             </div>
         </form>
     </div>

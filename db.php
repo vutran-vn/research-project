@@ -1,15 +1,29 @@
 <?php
 
-$servername = "localhost";
-$username = "root";
-$password = "rp2016";
+// Construct the MongoDB Manager
+$manager = new MongoDB\Driver\Manager("mongodb://localhost:27017");
 
-// Create connection
-$conn = new mysqli($servername, $username, $password);
+// Construct and execute the listDatabases command
+//$listdatabases = new MongoDB\Driver\Command(["listDatabases" => 1]);
+//$result = $manager->executeCommand("admin", $listdatabases);
 
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-} 
-echo "Connected successfully";
+/* The command returns a single result document, which contains the information
+ * for all databases in a "databases" array field. */
+$databases = current($result->toArray());
+var_dump($databases);
 
+//foreach ($databases["databases"] as $database) {
+//    echo $database->name, "\n";
+//
+//    // Construct and execute the listCollections command for each database
+//    $listcollections = new MongoDB\Driver\Command(["listCollections" => 1]);
+//    $result = $manager->executeCommand($database->name, $listcollections);
+//
+//    /* The command returns a cursor, which we can iterate on to access
+//     * information for each collection. */
+//    $collections = $result->toArray();
+//
+//    foreach ($collections as $collection) {
+//        echo "\t * ", $collection->name, "\n";
+//    }
+//}
