@@ -1,10 +1,13 @@
 <?php
 
 $config['custom'] = array(
-    'website_url' => 'http://www.serchen.co.uk',
+    'website_url' => 'http://www.serchen.com',
     'pages' => array(
         array(
-            'url' => 'categories.html',
+            'url' => 'http://www.serchen.com/browse/',
+            'pattern' => '',
+            'siblings_urls' => array(),
+            'has_structure' => '0',
             'objects' => array(
                 array(
                     'name' => 'category',
@@ -14,23 +17,26 @@ $config['custom'] = array(
                             'sample' => 'Accounting Software'),
                         array(
                             'name' => 'category_number',
-                            'sample' => '110')
+                            'sample' => '166')
                     )
                 )
             )
         ),
         array(
-            'url' => 'dedicated_hosting.html',
+            'url' => 'http://www.serchen.com/category/accounting-software/',
+            'pattern' => 'http://www.serchen.com/category/',
+            'siblings_urls' => array(),
+            'has_structure' => '0',
             'objects' => array(
                 array(
                     'name' => 'company',
                     'attributes' => array(
                         array(
                             'name' => 'company_name',
-                            'sample' => 'NameHOG'),
+                            'sample' => 'Xero'),
                         array(
                             'name' => 'company_service',
-                            'sample' => 'Dedicated Server')
+                            'sample' => 'Accounting Software')
                     )
                 )
             )

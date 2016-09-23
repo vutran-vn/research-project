@@ -1,4 +1,4 @@
 #!/usr/bin/env python2
 def init():
     global config
-    config = {"website_url":"http:\/\/www.serchen.co.uk","pages":[{"url":"dedicated_hosting.html","objects":[{"name":"company","parent_tag":{"name":"div","attributes":[{"name":"class","value":"company-tile-info"}]},"attributes":[{"name":"company_name","sample":"NameHOG"},{"name":"company_service","sample":"Dedicated Server"}]}]}]}
+    config = {"website_url":"http://www.serchen.com","pages":[{"url":"http://www.serchen.com/browse/","pattern":"","siblings_urls":[],"has_structure":"0","objects":[{"name":"category","attributes":[{"name":"category_name","sample":"Accounting Software"},{"name":"category_number","sample":"166"}]}]},{"url":"http://www.serchen.com/category/accounting-software/","pattern":"http://www.serchen.com/category/","siblings_urls":[],"has_structure":"0","objects":[{"name":"company","attributes":[{"name":"company_name","sample":"Xero"},{"name":"company_service","sample":"Accounting Software"}]}]}]}
