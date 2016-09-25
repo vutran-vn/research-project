@@ -6,7 +6,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <div id="config-website">
         <h2>Configuration</h2>
         <hr>
-        <form action="#">
+        <form id="form-save">
             <div class="website-url">
                 <div class="row">
                     <div class="col-md-2">Website URL:</div> 
@@ -40,6 +40,16 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                 <div class="col-md-4">
                                     <button type="button" class="btn btn-xs btn-danger btn-remove-page" data-page-index="<?= $page_index ?>" onclick="removePage(this)">Remove</button>
                                     <button type="button" class="btn btn-xs btn-success btn-add-object" data-page-index="<?= $page_index ?>" onclick="addObject(this)">Add object</button>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-2">
+                                    URL Pattern: 
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="text" name="page_pattern" value="<?= $page['pattern'] ?>">
+                                </div>
+                                <div class="col-md-4">
                                 </div>
                             </div>
                         </div>
@@ -78,7 +88,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                                                     <td><input type="text" name="attribute_name" value="<?= $attr['name'] ?>"></td>
                                                                     <td><input type="text" name="attribute_sample" value="<?= $attr['sample'] ?>"></td>
                                                                     <td><button type="button" class="btn btn-xs btn-danger btn-remove-attribute" onclick="removeAttribute(this)">Remove</button></td>
-                                                                    <td><input type="checkbox" value="get-updated" checked="checked"/></td>
+                                                                    <td><input type="checkbox" name="attribute_update" <?php if($attr['update'] == 'yes') { ?>checked="checked"<?php } ?>/></td>
                                                                 </tr>
                                                             <?php } ?>
                                                         </tbody>
@@ -96,9 +106,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 ?>
             </div>
             <hr>
-            <div>
-                <button type="submit" class="btn btn-success">Save</button>
+            <div class="form-actions">
+                <button type="button" class="btn btn-success btn-save-config" onclick="saveConfig()">Save</button>
                 <button type="button" class="btn btn-default btn-get-update">Get updated</button>
+            </div>
+            <div class="form-alerts">
             </div>
         </form>
     </div>

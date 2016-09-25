@@ -2,6 +2,6 @@
     <td><input type="text" name="attribute_name" value=""></td>
     <td><input type="text" name="attribute_sample" value=""></td>
     <td><button type="button" class="btn btn-xs btn-danger btn-remove-attribute" onclick="removeAttribute(this)">Remove</button></td>
-    <td><input type="checkbox" value="get-updated" checked="checked"/></td>
+    <td><input type="checkbox" name="attribute_update" <?php if($attr['update'] == 'yes') { ?>checked="checked"<?php } ?>/></td>
 </tr>
 

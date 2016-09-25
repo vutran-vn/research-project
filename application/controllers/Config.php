@@ -10,16 +10,20 @@ class Config extends CI_Controller {
      */
     public function index() {
         $data['title'] = "Harvesting Configuration";
-        $this->config->load('custom');
-        $data['custom_config'] = $this->config->item('custom');
-        
+        $data['custom_config'] = json_decode(file_get_contents(FCPATH . 'config.json'), true);
+
         $this->load->view('header', $data);
         $this->load->view('config', $data);
         $this->load->view('footer');
     }
 
     public function save() {
-        
+        $config_data = $this->input->post('config');
+        //Store config data to config.json file
+        $save_result = file_put_contents(FCPATH . 'config.json',$config_data);
+        $response = ($save_result == false) ? "Fail" : "OK";
+        echo $response;
+        exit;
     }
 
     public function addPage() {
@@ -27,14 +31,15 @@ class Config extends CI_Controller {
         header('Access-Control-Allow-Origin: *');
         $this->load->view('config-page', $data);
     }
-    
+
     public function addObject() {
         header('Access-Control-Allow-Origin: *');
         $this->load->view('config-object');
     }
-    
+
     public function addAttribute() {
         header('Access-Control-Allow-Origin: *');
         $this->load->view('config-attribute');
     }
+
 }

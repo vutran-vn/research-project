@@ -78,3 +78,24 @@ def analyse_structure(page):
                 
                 #Change the attribute has_structure to 1
                 page['has_structure'] = '1'
+    
+    #Function get all urls in this page
+    def get_urls():
+        def customize_links(link_list):
+            url_list = []
+            for link in link_list:
+                if "http" not in link['href']:
+                    url_list.append(settings.config['website_url'] + link['href'])
+                else:
+                    url_list.append(link['href'])
+
+            #Return unique item in the list
+            return list(set(url_list))
+
+        return customize_links(soup.findAll('a', href=True))
+    
+    #Get all urls from this page -> assign siblings_urls for the pages configuration appropriately
+    urls = get_urls();
+    for pa in settings.config['pages']:
+        pa['siblings_urls'] = [];
+        pa['siblings_urls'].extend([u for u in urls if pa['pattern'] != '' and pa['pattern'] in u])

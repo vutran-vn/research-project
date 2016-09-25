@@ -27,21 +27,6 @@ def get_data_from_page(page, url):
                 return None;
         return None;
     
-    #Function get all urls in this page
-    def get_urls():
-        def customize_links(link_list):
-            url_list = []
-            for link in link_list:
-                if "http" not in link['href']:
-                    url_list.append(settings.config['website_url'] + link['href'])
-                else:
-                    url_list.append(link['href'])
-
-            #Return unique item in the list
-            return list(set(url_list))
-
-        return customize_links(soup.findAll('a', href=True))
-    
     for obj in page['objects']: 
         parent_objects = find_tags(obj['parent_tag'])
             
@@ -78,10 +63,5 @@ def get_data_from_page(page, url):
         #Assign the object name to the retrieve list
         obj_name = obj['name'];
         result[obj_name] = result_objects;
-    
-    #Get all urls from this page -> assign siblings_urls for the pages configuration appropriately
-    urls = get_urls();
-    for pa in settings.config['pages']:
-        pa['siblings_urls'].extend([u for u in urls if pa['pattern'] != '' and pa['pattern'] in u])
     
     return result;

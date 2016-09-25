@@ -1,4 +1,35 @@
 #!/usr/bin/env python2
+import json
+
 def init():
     global config
-    config = {"website_url":"http://www.serchen.com","pages":[{"url":"http://www.serchen.com/browse/","pattern":"","siblings_urls":[],"has_structure":"0","objects":[{"name":"category","attributes":[{"name":"category_name","sample":"Accounting Software"},{"name":"category_number","sample":"166"}]}]},{"url":"http://www.serchen.com/category/accounting-software/","pattern":"http://www.serchen.com/category/","siblings_urls":[],"has_structure":"0","objects":[{"name":"company","attributes":[{"name":"company_name","sample":"Xero"},{"name":"company_service","sample":"Accounting Software"}]}]}]}
+    global config_structure
+    
+    #Read data from config.json
+    with open('../../../config.json', 'r') as f1:
+        try:
+            config = json.load(f1)
+        # if the file is empty the ValueError will be thrown
+        except ValueError:
+            config = {}
+    
+    #Read data from config_structure.json
+    with open('../../../config_structure.json', 'r') as f2:
+        try:
+            config_structure = json.load(f2)
+        # if the file is empty the ValueError will be thrown
+        except ValueError:
+            config_structure = {}
+            
+#    config = ast.literal_eval(open('../../../config.json', 'r').read())
+
+#init();
+#print config;
+
+def save_config():
+    with open('../../../config.json', 'w') as f1:
+        json.dump(config, f1)
+
+def save_config_structure():
+    with open('../../../config_structure.json', 'w') as f2:
+        json.dump(config_structure, f2)

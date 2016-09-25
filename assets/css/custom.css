@@ -26,3 +26,6 @@ body {
 #config-website table {
     margin: 0;
 }
+.form-actions {
+    margin: 5px 0;
+}

@@ -13,6 +13,16 @@
                 <button type="button" class="btn btn-xs btn-success btn-add-object" data-page-index="<?= $page_index ?>" onclick="addObject(this)">Add object</button>
             </div>
         </div>
+        <div class="row">
+            <div class="col-md-2">
+                URL Pattern: 
+            </div>
+            <div class="col-md-6">
+                <input type="text" name="page_pattern" value="">
+            </div>
+            <div class="col-md-4">
+            </div>
+        </div>
     </div>
     <div id="collapse-page<?= $page_index ?>" class="panel-collapse collapse">
         <?php $this->view('config-object'); ?>
