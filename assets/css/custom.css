@@ -18,13 +18,21 @@ body {
     margin-top: 10px;
 }
 #config-website .panel-heading, #config-website .panel-body {
-    padding: 8px;
+    padding: 5px;
 }
 #config-website .panel.panel-default {
     margin-bottom: 0;
 }
 #config-website table {
     margin: 0;
+}
+.table>tbody>tr>td, 
+.table>tbody>tr>th, 
+.table>tfoot>tr>td, 
+.table>tfoot>tr>th, 
+.table>thead>tr>td, 
+.table>thead>tr>th {
+    padding: 1px;
 }
 .form-actions {
     margin: 5px 0;

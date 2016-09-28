@@ -21,8 +21,6 @@ def init():
         except ValueError:
             config_structure = {}
             
-#    config = ast.literal_eval(open('../../../config.json', 'r').read())
-
 #init();
 #print config;
 

@@ -24,7 +24,7 @@
             </div>
         </div>
     </div>
-    <div id="collapse-page<?= $page_index ?>" class="panel-collapse collapse">
+    <div id="collapse-page<?= $page_index ?>" class="panel-collapse collapse in" aria-expanded="true">
         <?php $this->view('config-object'); ?>
     </div>
 </div>

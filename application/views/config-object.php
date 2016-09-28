@@ -22,6 +22,7 @@
                                 <th>Attribute Name</th>
                                 <th>Attribute Sample</th>
                                 <th>Action</th>
+                                <th>Update</th>
                             </tr>
                         </thead>
                         <tbody>

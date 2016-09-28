@@ -2,6 +2,7 @@
 from bs4 import BeautifulSoup
 import urllib2
 import settings
+import re
 
 def analyse_structure(page):
     p = urllib2.urlopen(page["url"]).read()
@@ -14,7 +15,8 @@ def analyse_structure(page):
     # - Return: List of tags OR empty list
     def find_tags_by_text(parentNode, stringSample):
         if parentNode:
-            return [text.parent for text in parentNode.find_all(text=stringSample)]
+            stringSample = stringSample[:25] if len(stringSample) > 25 else stringSample;
+            return [text.parent for text in parentNode.find_all(text=re.compile("^" + stringSample[:25]))]
         return None;
     
     def analyse_tag(tag):
@@ -45,20 +47,38 @@ def analyse_structure(page):
     # - Param 2: the object with a list of its attributes
     # - Return: the root parent tag of these attribute AND analyse the necessary structure of this parent
     def find_root_parent(object):
-        firstSample = object["attributes"][0]['sample'];
-        
-        firstSampleTags = find_tags_by_text(soup, firstSample);
-        for sampleTag in firstSampleTags:
-            parentTag = sampleTag.parent
-            for chance in range(1, 3):
+        def find_root_parent_chances(tag, chanceNumber):
+            parentTag = tag.parent
+            for chance in range(0, chanceNumber):
                 count = 0;
                 for attr in object["attributes"]:
-                    if attr['sample'] in parentTag.find_all(text=True):
+                    if find_tags_by_text(parentTag, attr['sample']):
                         count = count + 1;
                         
                 if count == len(object["attributes"]):
                     return parentTag;
                 parentTag = parentTag.parent
+            
+            return None
+            
+        firstSample = object["attributes"][0]['sample'];
+        
+        firstSampleTags = find_tags_by_text(soup, firstSample);
+        for sampleTag in firstSampleTags:
+            parent_tag = find_root_parent_chances(sampleTag, 3);
+            if parent_tag:
+                return parent_tag;
+            else:
+                parent_tag = find_root_parent_chances(sampleTag, 5);
+                if parent_tag:
+                    return parent_tag;
+                else:
+                    parent_tag = find_root_parent_chances(sampleTag, 7);
+                    if parent_tag:
+                        return parent_tag;
+                    else:
+                        return None;
+                
     
     #Find parent tag of the samples, analyse structures of samples to get "filter_tag" and "expected_result"
     for obj in page["objects"]:
