@@ -9,17 +9,19 @@ def analyse_structure(page):
     soup = BeautifulSoup(p);
     soup.prettify();
     
+    def reduce_string(string):
+        return string[:25] if len(string) > 25 else string;
+        
     #Find all tags which have the text of sample
     # - Param 1: stringSample - String of sample provided by User config
     # - Param 2: soup - BeautifulSoup instance
     # - Return: List of tags OR empty list
     def find_tags_by_text(parentNode, stringSample):
         if parentNode:
-            stringSample = stringSample[:25] if len(stringSample) > 25 else stringSample;
-            return [text.parent for text in parentNode.find_all(text=re.compile("^" + stringSample[:25]))]
+            return [text.parent for text in parentNode.find_all(text=re.compile("^" + reduce_string(stringSample)))]
         return None;
     
-    def analyse_tag(tag):
+    def analyse_parent_tag(tag):
         result = {};
         if tag:
             result["name"] = tag.name;
@@ -29,6 +31,14 @@ def analyse_structure(page):
                 result["attributes"].append({"name": "class", "value": tag.get('class')});
             if tag.get('id'):
                 result["attributes"].append({"name": "id", "value": tag.get('id')});
+        
+        return result;
+    
+    def analyse_tag(parentTag, tag):
+        result = {};
+        if tag:
+            result["name"] = tag.name;
+            result["position"] = [reduce_string(t.get_text()) for t in parentTag.find_all(tag.name)].index(reduce_string(tag.get_text()));
         
         return result;
 
@@ -84,7 +94,7 @@ def analyse_structure(page):
     for obj in page["objects"]:
         parentTag = find_root_parent(obj);
         #Analyse parent tag
-        obj['parent_tag'] = analyse_tag(parentTag);
+        obj['parent_tag'] = analyse_parent_tag(parentTag);
         
         #Loop all attribute and analyse filter tag and expected result for each attribute
         for attr in obj["attributes"]:
@@ -92,7 +102,7 @@ def analyse_structure(page):
             
             if attr_tags:
                 #Analyse attributes' filter tag
-                attr['filter_tag'] = analyse_tag(attr_tags[0]);
+                attr['filter_tag'] = analyse_tag(parentTag, attr_tags[0]);
                 #Analyse attrubutes' expected result
                 attr['expected_result'] = analyse_expected_result(attr_tags[0]);
                 

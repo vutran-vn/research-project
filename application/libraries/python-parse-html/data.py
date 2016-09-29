@@ -8,7 +8,6 @@ import settings
 # - Return: the expected data
 def get_data_from_page(page, url):
     result = {};
-    result_objects = [];
     
     #Open this page with BeautifulSoup
     p = urllib2.urlopen(url).read()
@@ -26,8 +25,9 @@ def get_data_from_page(page, url):
             else:
                 return None;
         return None;
-    
+        
     for obj in page['objects']: 
+        result_objects = [];
         parent_objects = find_tags(obj['parent_tag'])
             
         if parent_objects:
@@ -42,20 +42,29 @@ def get_data_from_page(page, url):
                 #If the parent is the right one, loop all attributes defined in Structure, then get the appropriate data
                 if isRightParent:
                     result_object = {};
-                    for attr in obj['attributes']:
-                        if par.find(attr['filter_tag']['name']):
-                            tag = par.find(attr['filter_tag']['name']);
+                    for attr in obj['attributes']:   
+                        if par.find_all(attr['filter_tag']['name']):
+                            tags = par.find_all(attr['filter_tag']['name']);
+                            
+                            if(attr['multiple'] == 'yes'):
+                                result_object[attr['name']] = [];
+                                for tag in tags:
+                                    #If tagText is set to "1": Get the text content of this tag
+                                    if attr['expected_result']['text'] == "1":
+                                        result_object[attr['name']].append(tag.get_text());
+                            else:
+                                tag = tags[attr['filter_tag']['position']];
 
-                            #If tagText is set to "1": Get the text content of this tag
-                            if attr['expected_result']['text'] == "1":
-                                result_object[attr['name']] = tag.get_text();
+                                #If tagText is set to "1": Get the text content of this tag
+                                if attr['expected_result']['text'] == "1":
+                                    result_object[attr['name']] = tag.get_text();
 
-                            #Check if there are any expected attribute value to get data, for example "href"
-                            for tag_attr in attr['expected_result']['attributes']:
-                                tag_attr_value = tag.get(tag_attr);
-                                if tag_attr == "href":
-                                    tag_attr_value = settings.config['website_url'] + tag_attr_value;
-                                result_object[tag_attr] = tag_attr_value;
+                                #Check if there are any expected attribute value to get data, for example "href"
+#                                for tag_attr in attr['expected_result']['attributes']:
+#                                    tag_attr_value = tag.get(tag_attr);
+#                                    if tag_attr == "href":
+#                                        tag_attr_value = settings.config['website_url'] + tag_attr_value;
+#                                    result_object[tag_attr] = tag_attr_value;
 
                     #Append the object data to final result 
                     result_objects.append(result_object);

@@ -93,6 +93,9 @@ function saveConfig() {
             case 'attribute_update':
                 attribute['update'] = $(this).is(":checked") ? 'yes' : 'no';
                 break;
+            case 'attribute_multiple':
+                attribute['multiple'] = $(this).is(":checked") ? 'yes' : 'no';
+                break;
         }
     });
 //    $('.form-actions').append(JSON.stringify(form_data));
@@ -102,9 +105,11 @@ function saveConfig() {
         data: {config:JSON.stringify(form_data)},
         success: function (data) {
             if(data == 'OK') {
-                $('.form-alerts').append('<div class="alert alert-success" role="alert"> <strong>Save successfully!</strong></div>');
+                $('#notification .modal-body').empty().append('<div class="alert alert-success" role="alert"> <strong>Save successfully!</strong></div>');
+                $('#notification').modal("show");
             } else {
-                $('.form-alerts').append('<div class="alert alert-danger" role="alert"> <strong>Oops, save failed!</strong></div>');
+                $('#notification .modal-body').empty().append('<div class="alert alert-danger" role="alert"> <strong>Oops, save failed!</strong></div>');
+                $('#notification').modal("show");
             }
         }
     });

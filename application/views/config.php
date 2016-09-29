@@ -80,6 +80,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                                                 <th>Attribute Sample</th>
                                                                 <th>Action</th>
                                                                 <th>Update</th>
+                                                                <th>Multiple</th>
                                                             </tr>
                                                         </thead>
                                                         <tbody>
@@ -89,6 +90,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                                                     <td><input type="text" name="attribute_sample" value="<?= $attr['sample'] ?>"></td>
                                                                     <td><button type="button" class="btn btn-xs btn-danger btn-remove-attribute" onclick="removeAttribute(this)">Remove</button></td>
                                                                     <td><input type="checkbox" name="attribute_update" <?php if($attr['update'] == 'yes') { ?>checked="checked"<?php } ?>/></td>
+                                                                    <td><input type="checkbox" name="attribute_multiple" <?php if($attr['multiple'] == 'yes') { ?>checked="checked"<?php } ?>/></td>
                                                                 </tr>
                                                             <?php } ?>
                                                         </tbody>
@@ -116,3 +118,18 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     </div>
 </div>
 
+<div class="modal fade" id="notification" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Notification</h4>
+      </div>
+      <div class="modal-body">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div>

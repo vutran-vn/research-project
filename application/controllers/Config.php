@@ -28,18 +28,24 @@ class Config extends CI_Controller {
 
     public function addPage() {
         $data['page_index'] = $this->input->post('pageIndex');
-        header('Access-Control-Allow-Origin: *');
         $this->load->view('config-page', $data);
     }
 
     public function addObject() {
-        header('Access-Control-Allow-Origin: *');
         $this->load->view('config-object');
     }
 
     public function addAttribute() {
-        header('Access-Control-Allow-Origin: *');
         $this->load->view('config-attribute');
+    }
+    
+    public function viewConfigJSON() {
+        $data['title'] = "Config JSON";
+        $data['custom_config'] = json_decode(file_get_contents(FCPATH . 'config.json'), true);
+        
+        $this->load->view('header', $data);
+        $this->load->view('config-json', $data);
+        $this->load->view('footer');
     }
 
 }
