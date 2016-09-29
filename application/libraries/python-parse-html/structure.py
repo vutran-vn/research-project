@@ -5,9 +5,18 @@ import settings
 import re
 
 def analyse_structure(page):
-    p = urllib2.urlopen(page["url"]).read()
+    try:
+        request = urllib2.Request(page["url"], headers={'User-Agent' : "Magic Browser"})
+        p = urllib2.urlopen(request).read()
+    except urllib2.HTTPError, e:
+        #e.fp.read()
+        print "Access denied!"
+        return
+        
     soup = BeautifulSoup(p);
     soup.prettify();
+    
+#    soup = BeautifulSoup(open(page["url"]));
     
     def reduce_string(string):
         return string[:25] if len(string) > 25 else string;
@@ -18,7 +27,7 @@ def analyse_structure(page):
     # - Return: List of tags OR empty list
     def find_tags_by_text(parentNode, stringSample):
         if parentNode:
-            return [text.parent for text in parentNode.find_all(text=re.compile("^" + reduce_string(stringSample)))]
+            return [text.parent for text in parentNode.find_all(text=re.compile("^\s*" + re.escape(reduce_string(stringSample))))]
         return None;
     
     def analyse_parent_tag(tag):
@@ -39,6 +48,12 @@ def analyse_structure(page):
         if tag:
             result["name"] = tag.name;
             result["position"] = [reduce_string(t.get_text()) for t in parentTag.find_all(tag.name)].index(reduce_string(tag.get_text()));
+            result["attributes"] = [];
+            
+            if tag.get('class'):
+                result["attributes"].append({"name": "class", "value": tag.get('class')});
+            if tag.get('id'):
+                result["attributes"].append({"name": "id", "value": tag.get('id')});
         
         return result;
 

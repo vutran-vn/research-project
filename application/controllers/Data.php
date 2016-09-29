@@ -17,39 +17,17 @@ class Data extends CI_Controller {
         $this->load->view('footer');
     }
     
-    public function viewPage1() {
-        $data['title'] = "Data";
-        $data['custom_config'] = json_decode(file_get_contents(FCPATH . 'page1.json'), true);
+    public function viewSample() {
+        $data['title'] = "Harvesting Data Sample";
+        $data['custom_config'] = json_decode(file_get_contents(FCPATH . 'config.json'), true);
         
+        $page = $this->input->post('page');
+        if($page) {
+            $data['page_data'] = json_decode(file_get_contents(FCPATH . $page), true);
+        }
+
         $this->load->view('header', $data);
-        $this->load->view('data', $data);
-        $this->load->view('footer');
-    }
-    
-    public function viewPage2() {
-        $data['title'] = "Data";
-        $data['custom_config'] = json_decode(file_get_contents(FCPATH . 'page2.json'), true);
-        
-        $this->load->view('header', $data);
-        $this->load->view('data', $data);
-        $this->load->view('footer');
-    }
-    
-    public function viewPage3() {
-        $data['title'] = "Data";
-        $data['custom_config'] = json_decode(file_get_contents(FCPATH . 'page3.json'), true);
-        
-        $this->load->view('header', $data);
-        $this->load->view('data', $data);
-        $this->load->view('footer');
-    }
-    
-    public function viewPage4() {
-        $data['title'] = "Data";
-        $data['custom_config'] = json_decode(file_get_contents(FCPATH . 'page4.json'), true);
-        
-        $this->load->view('header', $data);
-        $this->load->view('data', $data);
+        $this->load->view('data-sample', $data);
         $this->load->view('footer');
     }
 

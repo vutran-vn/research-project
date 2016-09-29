@@ -23,6 +23,7 @@
                                 <th>Attribute Sample</th>
                                 <th>Action</th>
                                 <th>Update</th>
+                                <th>Multiple</th>
                             </tr>
                         </thead>
                         <tbody>

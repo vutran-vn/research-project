@@ -11,9 +11,6 @@ def init():
         # if the file is empty the ValueError will be thrown
         except ValueError:
             config = {}
-            
-#init();
-#print config;
 
 def save_config():
     with open('../../../config.json', 'w') as f1:

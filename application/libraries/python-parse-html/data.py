@@ -10,32 +10,41 @@ def get_data_from_page(page, url):
     result = {};
     
     #Open this page with BeautifulSoup
-    p = urllib2.urlopen(url).read()
+    try:
+        request = urllib2.Request(url, headers={'User-Agent' : "Magic Browser"})
+        p = urllib2.urlopen(request).read()
+    except urllib2.HTTPError, e:
+        #e.fp.read()
+        print "Access denied!"
+        return
+    
     soup = BeautifulSoup(p);
     soup.prettify();
+
+#    soup = BeautifulSoup(open(page["url"]));
         
-    def find_tags(parent_structure):
-        if parent_structure:
-            if len(parent_structure['attributes']) == 0:
-                return soup.find_all(parent_structure['name']);
-            elif parent_structure['attributes'][0]["name"] == "class":
-                return soup.find_all(parent_structure['name'], parent_structure['attributes'][0]["value"]);
-            elif parent_structure['attributes'][0]["name"] == "id":
-                return soup.find_all(id=parent_structure['attributes'][0]["value"]);
+    def find_tags(parentNode, structure):
+        if structure:
+            if len(structure['attributes']) == 0:
+                return parentNode.find_all(structure['name']);
+            elif structure['attributes'][0]["name"] == "class":
+                return parentNode.find_all(structure['name'], structure['attributes'][0]["value"]);
+            elif structure['attributes'][0]["name"] == "id":
+                return parentNode.find_all(id=structure['attributes'][0]["value"]);
             else:
                 return None;
         return None;
         
     for obj in page['objects']: 
         result_objects = [];
-        parent_objects = find_tags(obj['parent_tag'])
+        parent_objects = find_tags(soup, obj['parent_tag'])
             
         if parent_objects:
             for par in parent_objects:
                 #Check if this parent has all the attributes indicated in the structure
                 isRightParent = True;
                 for attr in obj['attributes']:
-                    if not par.find(attr['filter_tag']['name']):
+                    if not find_tags(par, attr['filter_tag']):
                         isRightParent = False;
                         pass;
 
