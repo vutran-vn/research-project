@@ -1,19 +1,18 @@
 #!/usr/bin/env python2
 from bs4 import BeautifulSoup
-import settings
 import urllib2
+import json
+import re
 import time
-    
-settings.init();
 
-pages_siblings = [];
-for pa in settings.config['pages']:
-    page_config = {};
-    page_config['url'] = pa['url'];
-    page_config['pattern'] = pa['pattern'];
-    page_config['siblings_urls'] = [];
-    
-    pages_siblings.append(page_config);
+config_siblings = [];
+#Read data from config.json
+with open('../../../config-siblings.json', 'r') as f1:
+    try:
+        config_siblings = json.load(f1)
+    # if the file is empty the ValueError will be thrown
+    except ValueError:
+        config_siblings = {}
     
 #Function get all urls in this page
 def get_urls(page_url):
@@ -21,7 +20,7 @@ def get_urls(page_url):
         url_list = []
         for link in link_list:
             if "http" not in link['href']:
-                url_list.append(settings.config['website_url'] + link['href'])
+                url_list.append(config_siblings['website_url'] + link['href'])
             else:
                 url_list.append(link['href'])
 
@@ -32,37 +31,29 @@ def get_urls(page_url):
     soup = BeautifulSoup(p);
     soup.prettify();
     
-    return customize_links(soup.findAll('a', href=True))
+#    return customize_links(soup.findAll('a', href=True))
 
-def find_siblings(urls):
-    for pa in pages_siblings:
-        [pa['siblings_urls'].append(u) for u in urls if pa['pattern'] != '' and pa['pattern'] in u and u not in pa['siblings_urls']]
-    
-#Get all urls from this page -> assign siblings_urls for the pages configuration appropriately
-urls = get_urls(pages_siblings[1]['url']);
-find_siblings(urls)
-settings.save_links(pages_siblings)
+    for pa in config_siblings['pages']:
+        if pa['pattern'] != '':
+            pa['siblings_urls'].extend(url for url in customize_links(soup.findAll(href=re.compile(pa['pattern']))) if url not in pa['siblings_urls'])
 
-count = 0;
-for url in urls:
-    count = count + 1;
+#def find_siblings(urls):
+#    for pa in config_siblings['pages']:
+#        [pa['siblings_urls'].append(u) for u in urls if pa['pattern'] != '' and u == pa['pattern'] and u not in pa['siblings_urls']]
     
-    sub_urls = get_urls(url);
-    find_siblings(sub_urls);
+#Step 1: Get_urls from the first page
+#get_urls(config_siblings['pages'][0]['url']);
     
-    if count == 10:
-        settings.save_links(pages_siblings);
-        time.sleep(15);
-#
-#print pages_siblings;
+#Step 2: Loop all learned sibling urls from step 1
+runTime = 1
+minNumber = 10 * (runTime - 1)
+maxNumber = 10 * runTime
+for chance in range(minNumber, maxNumber):
+    time.sleep(3);
+    get_urls(config_siblings['pages'][1]['siblings_urls'][chance]);
 
-#count = 0;
-#for chance in range(340, 357):
-#    time.sleep(2);
-#    count = count + 1;
-#    
-#    sub_urls = get_urls(settings.categories[1]['siblings_urls'][chance]);
-#    find_siblings(sub_urls);
-#    
-#    settings.save_links(pages_siblings, '340_356_category.json');
-#    settings.save_position(count);
+#Step 3: Add detail /detail/ for all compnay urls
+
+
+with open('../../../config-siblings.json', 'w') as f2:
+    json.dump(config_siblings, f2)

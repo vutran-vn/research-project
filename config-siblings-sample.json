@@ -1,0 +1,25 @@
+{
+    "website_url": "http://www.serchen.com",
+    "pages": [
+        {
+            "url": "http://www.serchen.com/browse/",
+            "pattern": "",
+            "siblings_urls": []
+        },
+        {
+            "url": "http://www.serchen.com/category/accounting-software/",
+            "pattern": "/category/([a-zA-Z0-9-]+)/$",
+            "siblings_urls": []
+        },
+        {
+            "url": "http://www.serchen.com/company/xero/",
+            "pattern": "/company/([a-zA-Z0-9-]+)/$",
+            "siblings_urls": []
+        },
+        {
+            "url": "http://www.serchen.com/company/xero/details/",
+            "pattern": "/company/([a-zA-Z0-9-]+)/details/$",
+            "siblings_urls": []
+        }
+    ]
+}
