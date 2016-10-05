@@ -45,15 +45,16 @@ def get_urls(page_url):
 #get_urls(config_siblings['pages'][0]['url']);
     
 #Step 2: Loop all learned sibling urls from step 1
-runTime = 1
-minNumber = 10 * (runTime - 1)
-maxNumber = 10 * runTime
-for chance in range(minNumber, maxNumber):
-    time.sleep(3);
-    get_urls(config_siblings['pages'][1]['siblings_urls'][chance]);
+#runTime = 1
+#minNumber = 10 * (runTime - 1)
+#maxNumber = 10 * runTime
+#for chance in range(minNumber, maxNumber):
+#    time.sleep(3);
+#    get_urls(config_siblings['pages'][1]['siblings_urls'][chance]);
 
 #Step 3: Add detail /detail/ for all compnay urls
-
+for url in config_siblings['pages'][2]['siblings_urls']:
+    config_siblings['pages'][3]['siblings_urls'].append(url + 'details/')
 
 with open('../../../config-siblings.json', 'w') as f2:
     json.dump(config_siblings, f2)
