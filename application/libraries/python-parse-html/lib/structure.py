@@ -50,9 +50,9 @@ def analyse_structure(page):
             result["attributes"] = {};
             
             if tag.get('class'):
-                result["attributes"]["class"] = tag.get('class');
+                result["attributes"]["class"] = " ".join(tag.get('class'));
             if tag.get('id'):
-                result["attributes"]["id"] = tag.get('id');
+                result["attributes"]["id"] = " ".join(tag.get('id'));
         
         return result;
 
@@ -122,3 +122,8 @@ def analyse_structure(page):
                 
                 #Change the attribute has_structure to 1
                 page['has_structure'] = '1'
+                
+        #Loop all sub pages of this object and analyse structure as well
+        if 'pages' in obj:
+            for sub_page in obj['pages']:
+                analyse_structure(sub_page)

@@ -9,11 +9,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 <div class="col-md-2"><strong>Select page:</strong></div> 
                 <div class="col-md-8">
                     <select name="page">
-                        <?php foreach ($custom_config['pages'] as $index => $page) { 
-                            $value = "page".$index.".json";
-                            $selected = ($this->input->post('page') == $value) ? "selected" : '';
+                        <?php foreach ($sample_pages as $pageName => $pageURL) { 
+                            $selected = ($this->input->post('page') == $pageName) ? "selected" : '';
                             ?>
-                            <option value="<?= $value ?>" <?= $selected ?>><?= $page['url'] ?></option>
+                            <option value="<?= $pageName ?>" <?= $selected ?>><?= $pageURL ?></option>
                         <?php } ?>
                     </select>
                 </div>

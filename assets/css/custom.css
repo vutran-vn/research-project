@@ -16,12 +16,21 @@ body {
 }
 #config-website .pages {
     margin-top: 10px;
+    font-size: 13px;
 }
 #config-website .panel-heading, #config-website .panel-body {
     padding: 5px;
 }
 #config-website .panel.panel-default {
-    margin-bottom: 0;
+    margin: -5px;
+    border: 0;
+    border-top: 1px solid #d6e9c6;
+}
+#config-website .col-md-2 {
+    text-align: right;
+}
+#config-website .page {
+    margin: 10px;
 }
 #config-website table {
     margin: 0;

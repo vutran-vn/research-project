@@ -1,11 +1,52 @@
 #!/usr/bin/env python2
 from pymongo import MongoClient;
+
+#Connect MongoDB Client
 client = MongoClient();
+
+#Access database. This case is "test"
 db = client.test;
-datadb = db.data;
 
-def insert_db(data):
-    datadb.insert_many(data);
+#Access collection (a group of documents) = equivalent of a table in relational database
 
-def query_db():
-    print datadb.find();
+#Get all current collections in the database
+# - Return: Collections (List)
+def list_collections():
+    return db.collection_names(include_system_collections=False)
+
+#Insert one document to a particular collection
+# - Param: collection_name, collection_document
+# - Return: InsertOneResult Object
+def insert_one_document(collection_name, collection_document):
+    #Access collection and insert data
+    collection = db[collection_name];
+    return collection.insert_one(collection_document);
+
+#Insert many documents to a particular collection
+# - Param: collection_name, collection_document
+# - Return: InsertOneResult Object
+def insert_many_documents(collection_name, collection_document):
+    #Access collection and insert data
+    collection = db[collection_name];
+    return collection.insert_many(collection_document);
+
+def find_one_document(collection_name, query_dictionary):
+    #Access collection and insert data
+    collection = db[collection_name];
+    if query_dictionary:
+        return collection.find_one(query_dictionary);
+    else:
+        return collection.find_one();
+
+def find_many_documents(collection_name, query_dictionary):
+    #Access collection and insert data
+    collection = db[collection_name];
+    if query_dictionary:
+        return collection.find(query_dictionary);
+    else:
+        return collection.find();
+    
+def count_document(collection_name):
+    #Access collection and insert data
+    collection = db[collection_name];
+    return collection.count();

@@ -19,7 +19,7 @@ class Data extends CI_Controller {
     
     public function viewSample() {
         $data['title'] = "Harvesting Data Sample";
-        $data['custom_config'] = json_decode(file_get_contents(FCPATH . 'config.json'), true);
+        $data['sample_pages'] = json_decode(file_get_contents(FCPATH . 'sample-pages.json'), true);
         
         $page = $this->input->post('page');
         if($page) {
