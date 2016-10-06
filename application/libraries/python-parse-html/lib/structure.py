@@ -1,7 +1,6 @@
 #!/usr/bin/env python2
 from bs4 import BeautifulSoup
 import urllib2
-import settings
 import re
 
 def analyse_structure(page):
@@ -34,12 +33,12 @@ def analyse_structure(page):
         result = {};
         if tag:
             result["name"] = tag.name;
-            result["attributes"] = [];
+            result["attributes"] = {};
 
             if tag.get('class'):
-                result["attributes"].append({"name": "class", "value": tag.get('class')});
+                result["attributes"]["class"] = " ".join(tag.get('class'));
             if tag.get('id'):
-                result["attributes"].append({"name": "id", "value": tag.get('id')});
+                result["attributes"]["id"] = " ".join(tag.get('id'));
         
         return result;
     
@@ -48,12 +47,12 @@ def analyse_structure(page):
         if tag:
             result["name"] = tag.name;
             result["position"] = [reduce_string(t.get_text()) for t in parentTag.find_all(tag.name)].index(reduce_string(tag.get_text()));
-            result["attributes"] = [];
+            result["attributes"] = {};
             
             if tag.get('class'):
-                result["attributes"].append({"name": "class", "value": tag.get('class')});
+                result["attributes"]["class"] = tag.get('class');
             if tag.get('id'):
-                result["attributes"].append({"name": "id", "value": tag.get('id')});
+                result["attributes"]["id"] = tag.get('id');
         
         return result;
 

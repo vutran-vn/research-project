@@ -1,7 +1,6 @@
 #!/usr/bin/env python2
 from bs4 import BeautifulSoup
 import urllib2
-import settings
 
 #Get data from a particular page
 # - Param: 
@@ -27,12 +26,11 @@ def get_data_from_page(page, url):
         if structure:
             if len(structure['attributes']) == 0:
                 return parentNode.find_all(structure['name']);
-            elif structure['attributes'][0]["name"] == "class":
-                return parentNode.find_all(structure['name'], structure['attributes'][0]["value"]);
-            elif structure['attributes'][0]["name"] == "id":
-                return parentNode.find_all(id=structure['attributes'][0]["value"]);
+            elif len(structure['attributes']) == 1:
+                return parentNode.find_all(structure['name'], attrs=structure['attributes']);
             else:
                 return None;
+            
         return None;
         
     for obj in page['objects']: 
