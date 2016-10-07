@@ -30,5 +30,22 @@ class Data extends CI_Controller {
         $this->load->view('data-sample', $data);
         $this->load->view('footer');
     }
+    
+    public function viewSiblingsJSON() {
+        $data['title'] = "Siblings JSON";
+        $data['config_siblings'] = json_decode(file_get_contents(FCPATH . 'data/links/config-siblings.json'), true);
+        
+        $this->load->view('header', $data);
+        $this->load->view('data-siblings', $data);
+        $this->load->view('footer');
+    }
+    
+    public function viewData() {
+        $data['title'] = "Harvesting Data";
+        
+        $this->load->view('header', $data);
+        $this->load->view('data-sample', $data);
+        $this->load->view('footer');
+    }
 
 }

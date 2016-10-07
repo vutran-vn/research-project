@@ -24,9 +24,12 @@ def analyse_structure(page):
     # - Param 1: stringSample - String of sample provided by User config
     # - Param 2: soup - BeautifulSoup instance
     # - Return: List of tags OR empty list
-    def find_tags_by_text(parentNode, stringSample):
+    def find_tags_by_text(parentNode, stringSample, isFullText):
         if parentNode:
-            return [text.parent for text in parentNode.find_all(text=re.compile("^\s*" + re.escape(reduce_string(stringSample))))]
+            if isFullText == 'yes':
+                return [text.parent for text in parentNode.find_all(text=re.compile("^\s*" + re.escape(stringSample) + "$"))]
+            else:
+                return [text.parent for text in parentNode.find_all(text=re.compile("^\s*" + re.escape(reduce_string(stringSample))))]
         return None;
     
     def analyse_parent_tag(tag):
@@ -76,7 +79,7 @@ def analyse_structure(page):
             for chance in range(0, chanceNumber):
                 count = 0;
                 for attr in object["attributes"]:
-                    if find_tags_by_text(parentTag, attr['sample']):
+                    if find_tags_by_text(parentTag, attr['sample'], attr['full_text']):
                         count = count + 1;
                         
                 if count == len(object["attributes"]):
@@ -87,7 +90,7 @@ def analyse_structure(page):
             
         firstSample = object["attributes"][0]['sample'];
         
-        firstSampleTags = find_tags_by_text(soup, firstSample);
+        firstSampleTags = find_tags_by_text(soup, firstSample, object["attributes"][0]['full_text']);
         for sampleTag in firstSampleTags:
             parent_tag = find_root_parent_chances(sampleTag, 3);
             if parent_tag:
@@ -112,7 +115,7 @@ def analyse_structure(page):
         
         #Loop all attribute and analyse filter tag and expected result for each attribute
         for attr in obj["attributes"]:
-            attr_tags = find_tags_by_text(parentTag, attr['sample']);
+            attr_tags = find_tags_by_text(parentTag, attr['sample'], attr['full_text']);
             
             if attr_tags:
                 #Analyse attributes' filter tag

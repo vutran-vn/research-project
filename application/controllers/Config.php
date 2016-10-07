@@ -47,14 +47,5 @@ class Config extends CI_Controller {
         $this->load->view('config-json', $data);
         $this->load->view('footer');
     }
-    
-    public function viewSiblingsJSON() {
-        $data['title'] = "Config Siblings JSON";
-        $data['custom_config'] = json_decode(file_get_contents(FCPATH . 'data/links/config-siblings.json'), true);
-        
-        $this->load->view('header', $data);
-        $this->load->view('config-json', $data);
-        $this->load->view('footer');
-    }
 
 }

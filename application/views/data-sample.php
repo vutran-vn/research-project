@@ -4,6 +4,16 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 <div id="container">
     <div id="data-sample-website">
+        <div id="project-name">
+            Project: Develop a Web Application for Harvesting Cloud Services Information from the Web
+        </div>
+        <hr>
+        
+        <a href="<?= site_url('home') ?>">Home</a> > View Sample Data
+        <h3>Sample Data</h3>
+        
+        <hr>
+        
         <form id="form-data-sample" method="post">
             <div class="row">
                 <div class="col-md-2"><strong>Select page:</strong></div> 

@@ -109,8 +109,9 @@ function analyse_attribute(attributeElement) {
             var attribute = {};
             attribute['name'] = $(this).find("input[name='attribute_name']").val();
             attribute['sample'] = $(this).find("input[name='attribute_sample']").val();
-            attribute['update'] = $(this).find("input[name='attribute_update']").is(":checked") ? 'yes' : 'no';
             attribute['multiple'] = $(this).find("input[name='attribute_multiple']").is(":checked") ? 'yes' : 'no';
+            attribute['full_text'] = $(this).find("input[name='attribute_full_text']").is(":checked") ? 'yes' : 'no';
+            attribute['update'] = $(this).find("input[name='attribute_update']").is(":checked") ? 'yes' : 'no';
             attributes.push(attribute);
         });
     }

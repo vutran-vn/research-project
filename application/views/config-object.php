@@ -9,23 +9,24 @@
                 <div class="col-md-4">
                     <button type="button" class="btn btn-xs btn-danger btn-remove-object" onclick="removeObject(this)"><span class="glyphicon glyphicon-minus" aria-hidden="true"></span></button>
                     <button type="button" class="btn btn-xs btn-info btn-add-attribute" onclick="addAttribute(this)"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> attribute</button>
-                    <!--<button type="button" class="btn btn-xs btn-success btn-add-page" onclick="addObjectPage(this)"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> page</button>-->
+                    <button type="button" class="btn btn-xs btn-success btn-add-page" onclick="addObjectPage(this)"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> page</button>
                 </div>
             </div>
         </div>
         <div class="panel-body">
             <div class="attributes">
                 <div class="row">
-                    <div class="col-md-2"></div>
-                    <div class="col-md-10">
+                    <div class="col-md-1"></div>
+                    <div class="col-md-11">
                         <table class="table attributes">
                             <thead>
                                 <tr>
                                     <th>Attribute Name</th>
                                     <th>Attribute Sample</th>
                                     <th>Action</th>
-                                    <th>Update</th>
                                     <th>Multiple</th>
+                                    <th>Full text</th>
+                                    <th>Update</th>
                                 </tr>
                             </thead>
                             <tbody>

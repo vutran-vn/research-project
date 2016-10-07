@@ -11,7 +11,6 @@ def get_sample_data(page):
     liveData = data.get_data_from_page(page, page['url']);
     
     #Save data to a file
-    print page['url'];
     fileName = 'data/sample/sample-page-'+str(len(samplePages) + 1)+'.json';
     settings.save_data(liveData, fileName)
     samplePages[fileName] = page['url'];

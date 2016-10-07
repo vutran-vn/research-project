@@ -1,15 +1,21 @@
 body {
     max-width: 800px;
     margin: 0 auto;
+    background-image: url("../img/bg-repeat.jpe");
+    background-repeat: repeat;
+}
+#container {
+    background-color: white;
     padding: 10px;
 }
-#harvest-website {
-    padding: 20px;
+#project-name {
+    font-size: 18px;
 }
-#config-website {
-    padding: 10px;
-    border: 1px solid gray;
-    border-radius: 10px;
+#home-website table td {
+    padding: 5px;
+}
+#home-website .panel {
+    margin: 0;
 }
 #config-website input[type="text"] {
     width: 100%;
