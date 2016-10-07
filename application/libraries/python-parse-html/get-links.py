@@ -7,7 +7,7 @@ import time
 
 config_siblings = [];
 #Read data from config.json
-with open('../../../config-siblings.json', 'r') as f1:
+with open('../../../data/links/config-siblings.json', 'r') as f1:
     try:
         config_siblings = json.load(f1)
     # if the file is empty the ValueError will be thrown
@@ -56,5 +56,5 @@ def get_urls(page_url):
 for url in config_siblings['pages'][2]['siblings_urls']:
     config_siblings['pages'][3]['siblings_urls'].append(url + 'details/')
 
-with open('../../../config-siblings.json', 'w') as f2:
+with open('../../../data/links/config-siblings.json', 'w') as f2:
     json.dump(config_siblings, f2)

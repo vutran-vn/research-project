@@ -5,7 +5,7 @@ def init():
     global config
     
     #Read data from config.json
-    with open('../../../config.json', 'r') as f1:
+    with open('../../../data/config/config.json', 'r') as f1:
         try:
             config = json.load(f1)
         # if the file is empty the ValueError will be thrown
@@ -13,7 +13,7 @@ def init():
             config = {}
 
 def save_config():
-    with open('../../../config.json', 'w') as f1:
+    with open('../../../data/config/config.json', 'w') as f1:
         json.dump(config, f1)
         
 def save_data(liveData, filename):

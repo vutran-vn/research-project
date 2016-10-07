@@ -10,7 +10,7 @@ class Config extends CI_Controller {
      */
     public function index() {
         $data['title'] = "Harvesting Configuration";
-        $data['custom_config'] = json_decode(file_get_contents(FCPATH . 'config.json'), true);
+        $data['custom_config'] = json_decode(file_get_contents(FCPATH . 'data/config/config.json'), true);
 
         $this->load->view('header', $data);
         $this->load->view('config', $data);
@@ -20,7 +20,7 @@ class Config extends CI_Controller {
     public function save() {
         $config_data = $this->input->post('config');
         //Store config data to config.json file
-        $save_result = file_put_contents(FCPATH . 'config.json',$config_data);
+        $save_result = file_put_contents(FCPATH . 'data/config/config.json',$config_data);
         $response = ($save_result == false) ? "Fail" : "OK";
         echo $response;
         exit;
@@ -41,7 +41,7 @@ class Config extends CI_Controller {
     
     public function viewConfigJSON() {
         $data['title'] = "Config JSON";
-        $data['custom_config'] = json_decode(file_get_contents(FCPATH . 'config.json'), true);
+        $data['custom_config'] = json_decode(file_get_contents(FCPATH . 'data/config/config.json'), true);
         
         $this->load->view('header', $data);
         $this->load->view('config-json', $data);
@@ -50,7 +50,7 @@ class Config extends CI_Controller {
     
     public function viewSiblingsJSON() {
         $data['title'] = "Config Siblings JSON";
-        $data['custom_config'] = json_decode(file_get_contents(FCPATH . 'config-siblings.json'), true);
+        $data['custom_config'] = json_decode(file_get_contents(FCPATH . 'data/links/config-siblings.json'), true);
         
         $this->load->view('header', $data);
         $this->load->view('config-json', $data);

@@ -1,0 +1,51 @@
+{
+    "website_url": "http://www.serchen.com",
+    "pages-sample": [
+        {
+            "url": "http://www.serchen.com/browse/",
+            "pattern": "",
+            "objects": [
+                {
+                    "name": "category",
+                    "pages": [
+                        {
+                            "pattern": "/category/([a-zA-Z0-9-]+)/$",
+                            "objects": [
+                                {
+                                    "name": "company",
+                                    "pages": [
+                                        {
+                                            "pattern": "/company/([a-zA-Z0-9-]+)/$",
+                                            "objects": [
+                                                {
+                                                    "name": "review"
+                                                },
+                                                {
+                                                    "name": "more_info"
+                                                },
+                                                {
+                                                    "name": "services"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "pattern": "/company/([a-zA-Z0-9-]+)/details/$",
+                                            "objects": [
+                                                {
+                                                    "name": "about"
+                                                },
+                                                {
+                                                    "name": "key_feature"
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

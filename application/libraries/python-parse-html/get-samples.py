@@ -12,7 +12,7 @@ def get_sample_data(page):
     
     #Save data to a file
     print page['url'];
-    fileName = 'sample-page-'+str(len(samplePages) + 1)+'.json';
+    fileName = 'data/sample/sample-page-'+str(len(samplePages) + 1)+'.json';
     settings.save_data(liveData, fileName)
     samplePages[fileName] = page['url'];
     
@@ -26,4 +26,4 @@ for page in settings.config['pages']:
     get_sample_data(page)
     
 #Save samplePages to file sample-pages.json
-settings.save_data(samplePages, "sample-pages.json");
+settings.save_data(samplePages, "data/sample/sample-pages.json");

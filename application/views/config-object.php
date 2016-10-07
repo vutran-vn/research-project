@@ -9,7 +9,7 @@
                 <div class="col-md-4">
                     <button type="button" class="btn btn-xs btn-danger btn-remove-object" onclick="removeObject(this)"><span class="glyphicon glyphicon-minus" aria-hidden="true"></span></button>
                     <button type="button" class="btn btn-xs btn-info btn-add-attribute" onclick="addAttribute(this)"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> attribute</button>
-                    <button type="button" class="btn btn-xs btn-success btn-add-page" onclick="addObjectPage(this)"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> page</button>
+                    <!--<button type="button" class="btn btn-xs btn-success btn-add-page" onclick="addObjectPage(this)"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> page</button>-->
                 </div>
             </div>
         </div>

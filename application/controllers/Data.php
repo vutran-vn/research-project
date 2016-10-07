@@ -10,7 +10,7 @@ class Data extends CI_Controller {
      */
     public function index() {
         $data['title'] = "Harvesting Data";
-        $data['custom_config'] = json_decode(file_get_contents(FCPATH . 'config.json'), true);
+        $data['custom_config'] = json_decode(file_get_contents(FCPATH . 'data/config/config.json'), true);
 
         $this->load->view('header', $data);
         $this->load->view('config', $data);
@@ -19,7 +19,7 @@ class Data extends CI_Controller {
     
     public function viewSample() {
         $data['title'] = "Harvesting Data Sample";
-        $data['sample_pages'] = json_decode(file_get_contents(FCPATH . 'sample-pages.json'), true);
+        $data['sample_pages'] = json_decode(file_get_contents(FCPATH . 'data/sample/sample-pages.json'), true);
         
         $page = $this->input->post('page');
         if($page) {
