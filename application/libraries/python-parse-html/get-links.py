@@ -53,8 +53,14 @@ def get_urls(page_url):
 #    get_urls(config_siblings['pages'][1]['siblings_urls'][chance]);
 
 #Step 3: Add detail /detail/ for all compnay urls
-for url in config_siblings['pages'][2]['siblings_urls']:
-    config_siblings['pages'][3]['siblings_urls'].append(url + 'details/')
+for idx, url in enumerate(config_siblings['pages'][2]['siblings_urls']):
+    url_merge = {};
+    url_merge['url'] = url;
+    url_merge['objects'] = [];
+    obj = {};
+    obj['detail'] = url + 'details/';
+    url_merge['objects'].append(obj);
+    config_siblings['pages'][2]['siblings_urls'][idx] = url_merge;
 
 with open('../../../data/links/config-siblings.json', 'w') as f2:
     json.dump(config_siblings, f2)

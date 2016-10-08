@@ -6,7 +6,7 @@ import urllib2
 # - Param: 
 # - Return: the expected data
 def get_data_from_page(page, url):
-    result = {};
+    result = [];
     
     #Open this page with BeautifulSoup
     try:
@@ -37,7 +37,7 @@ def get_data_from_page(page, url):
         return True if node2 in node1.descendants else False;
         
     for obj in page['objects']: 
-        result_objects = [];
+        data_objects = [];
         search_objects = find_tags(soup, obj['parent_tag'])
             
         if search_objects:
@@ -93,10 +93,10 @@ def get_data_from_page(page, url):
 #                                    result_object[tag_attr] = tag_attr_value;
 
                 #Append the object data to final result 
-                result_objects.append(result_object);
+                data_objects.append(result_object);
                     
         #Assign the object name to the retrieve list
-        obj_name = obj['name'];
-        result[obj_name] = result_objects;
+        currentObject = {'object_name': obj['name'], 'data': data_objects};
+        result.append(currentObject);
     
-    return result;
+    return result;    
