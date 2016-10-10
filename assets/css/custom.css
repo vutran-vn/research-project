@@ -4,6 +4,10 @@ body {
     background-image: url("../img/bg-repeat.jpe");
     background-repeat: repeat;
 }
+hr {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
 #container {
     background-color: white;
     padding: 10px;
@@ -16,6 +20,11 @@ body {
 }
 #home-website .panel {
     margin: 0;
+}
+#home-website #target-website {
+    font-size: 17px;
+    text-align: center;
+    color: #31708f;
 }
 #config-website input[type="text"] {
     width: 100%;
