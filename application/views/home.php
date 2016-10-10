@@ -39,7 +39,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
         <hr>
         <div class="features">
-            <div id="target-website">Target website: http://www.serchen.com</div>
+            <div id="target-website">Target website: <a href="http://www.serchen.com" target="_blank">http://www.serchen.com</a></div>
             <div>
                 <strong>Datasets:</strong>
                 <ul>
