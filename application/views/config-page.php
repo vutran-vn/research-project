@@ -23,6 +23,16 @@
             <div class="col-md-4">
             </div>
         </div>
+        <div class="row">
+            <div class="col-md-2">
+                Collection Name: 
+            </div>
+            <div class="col-md-6">
+                <input type="text" name="page_collection_name" value="<?= isset($page['collection_name']) ? $page['collection_name'] : '' ?>">
+            </div>
+            <div class="col-md-4">
+            </div>
+        </div>
     </div>
     <div id="collapse-page<?= $page_index ?>" class="panel-collapse collapse in" aria-expanded="true">
         <?php

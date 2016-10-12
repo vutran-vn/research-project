@@ -82,6 +82,7 @@ function analyse_page(pageElement) {
     var page = {};
     page['url'] = $(pageElement).find("input[name='page_url']").first().val();
     page['pattern'] = $(pageElement).find("input[name='page_pattern']").first().val();
+    page['collection_name'] = $(pageElement).find("input[name='page_collection_name']").first().val();
     page['objects'] = new Array();
 
     $(pageElement).find(" > .panel-collapse > .object").each(function () {

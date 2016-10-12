@@ -8,12 +8,13 @@ settings.init()
 samplePages = {};
 
 def get_sample_data(page):
-    result = data.get_data_from_page(page, page['url']);
+    result = {"collection_name" : page['collection_name']};
+    result["root_data"] = data.get_data_from_page(page, page['url']);
     
     for obj in page['objects']:
         if 'pages' in obj:
             for sub_page in obj['pages']:
-                for result_obj in result:
+                for result_obj in result["root_data"]:
                     if result_obj['object_name'] == obj['name']:
                         for d in result_obj['data']:
                             d['sub_data'] = data.get_data_from_page(sub_page, sub_page['url']);

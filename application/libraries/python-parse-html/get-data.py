@@ -38,33 +38,39 @@ def get_data_multiple_siblings(siblings, startPosition, endPosition):
     result = {};
     for chance in range(startPosition, endPosition + 1):
         entity = siblings[chance];
-        if isinstance(entity, basestring):
-            config_page = search_config_page(entity);
-            result = data.get_data_from_page(config_page, entity);
-        else:
-            config_page = search_config_page(entity['url']);
-            result = data.get_data_from_page(config_page, entity['url']);
-#            print result;
-            if len(entity['objects']) > 0:
-                for obj in entity['objects']:
-                    for key, url in obj.iteritems():
-                        config_sub_page = search_config_page(url);
-                        for result_obj in result:
-                            if result_obj['object_name'] == key:
-                                for d in result_obj['data']:
-                                    d['sub_data'] = data.get_data_from_page(config_sub_page, url);
-            print result;
+        result = get_data(entity);
     return result;
-        
-def get_data(page):
+
+def get_data(entity):
     result = {};
-    if len(page['siblings_urls']) == 0:
-        config_page = search_config_page(page['url']);
-        result = data.get_data_from_page(config_page, page['url']);
+    if isinstance(entity, basestring):
+        config_page = search_config_page(entity);
+        result = data.get_data_from_page(config_page, entity);
     else:
-        result = get_data_multiple_siblings(page['siblings_urls'], 0, 1);
-    
+        config_page = search_config_page(entity['url']);
+        result = data.get_data_from_page(config_page, entity['url']);
+#            print result;
+        if len(entity['objects']) > 0:
+            for obj in entity['objects']:
+                for key, url in obj.iteritems():
+                    config_sub_page = search_config_page(url);
+                    for result_obj in result:
+                        if result_obj['object_name'] == key:
+                            for d in result_obj['data']:
+                                d['sub_data'] = data.get_data_from_page(config_sub_page, url);
+        print result;
     return result;
+
+def get_data_main():
+    result = {};
+    
+    for page in config_siblings['pages']:
+        if len(page['siblings_urls']) == 0:
+            result = data.get_data(page['url']);
+        else:
+            result = get_data_multiple_siblings(page['siblings_urls'], 0, 1);
+
+        return result;
     
     #Save data to mongoDB
     
