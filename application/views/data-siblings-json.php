@@ -8,7 +8,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         </div>
         <hr>
         
-        <a href="<?= site_url('home') ?>">Home</a> > View URLs
+        <a href="<?= site_url('home') ?>">Home</a> > View URLs (JSON)
         <h3>URLs</h3>
         
         <hr>

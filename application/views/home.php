@@ -60,18 +60,29 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             <div class="panel panel-success">
                 <div class="panel-heading">Configuration</div>
                 <div class="panel-body">
-                    <a href="<?= site_url('config') ?>" class="btn btn-success">Config</a>
-                    <a href="<?= site_url('config/viewConfigJSON') ?>" class="btn btn-success">View Config Structure (JSON)</a>
+                    <div>
+                        <a href="<?= site_url('config') ?>" class="btn btn-success">Config</a>
+                    </div>
+                    <hr>
+                    <div>
+                        <a href="<?= site_url('config/viewConfigJSON') ?>" class="btn btn-success">View Config Structure (JSON)</a>
+                    </div>
                 </div>
             </div>
 
             <div class="panel panel-info">
                 <div class="panel-heading">Data</div>
                 <div class="panel-body">
-                    <a href="<?= site_url('data/viewSample') ?>" class="btn btn-info">View Sample Data</a>
-                    <a href="<?= site_url('data/viewSampleJSON') ?>" class="btn btn-info">View Sample Data (JSON)</a>
-                    <a href="<?= site_url('data/viewSiblingsJSON') ?>" class="btn btn-info">View URLs (JSON)</a>
-                    <a href="<?= site_url('config/viewData') ?>" class="btn btn-info">View Data</a>
+                    <div>
+                        <a href="<?= site_url('data/viewSample') ?>" class="btn btn-info">View Sample Data</a>
+                        <a href="<?= site_url('data/viewSiblings') ?>" class="btn btn-info">View URLs</a>
+                        <a href="<?= site_url('config/viewData') ?>" class="btn btn-info">View Data</a>
+                    </div>
+                    <hr>
+                    <div>
+                        <a href="<?= site_url('data/viewSampleJSON') ?>" class="btn btn-info">View Sample Data (JSON)</a>
+                        <a href="<?= site_url('data/viewSiblingsJSON') ?>" class="btn btn-info">View URLs (JSON)</a>
+                    </div>
                 </div>
             </div>
         </div>
