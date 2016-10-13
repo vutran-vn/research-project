@@ -67,7 +67,7 @@ class Data extends CI_Controller {
         $data['title'] = "Harvesting Data";
         
         $this->load->view('header', $data);
-        $this->load->view('data-sample', $data);
+        $this->load->view('data', $data);
         $this->load->view('footer');
     }
 

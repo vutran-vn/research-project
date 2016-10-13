@@ -1,11 +1,13 @@
 #!/usr/bin/env python2
 from pymongo import MongoClient;
 
-#Connect MongoDB Client
-client = MongoClient();
+def init():
+    #Connect MongoDB Client
+    client = MongoClient();
 
-#Access database. This case is "test"
-db = client.test;
+    #Access database. This case is "test"
+    global db
+    db = client.test;
 
 #Access collection (a group of documents) = equivalent of a table in relational database
 
@@ -27,6 +29,9 @@ def insert_one_document(collection_name, collection_document):
 # - Return: InsertOneResult Object
 def insert_many_documents(collection_name, collection_document):
     #Access collection and insert data
+#    if not collection_name in db.collection_names():
+#        db.createCollection(collection_name)
+        
     collection = db[collection_name];
     return collection.insert_many(collection_document);
 

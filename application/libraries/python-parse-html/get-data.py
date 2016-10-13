@@ -2,10 +2,12 @@
 #encoding: UTF-8
 from lib import settings
 from lib import data
+from lib import database
 import json
 import re
 
 settings.init()
+database.init()
 
 config_siblings = [];
 #Read data from config.json
@@ -34,49 +36,40 @@ def search_config_page(page_url):
                         return sub_pa;
     return page;
 
-def get_data_multiple_siblings(siblings, startPosition, endPosition):
-    result = {};
-    for chance in range(startPosition, endPosition + 1):
-        entity = siblings[chance];
-        result = get_data(entity);
-    return result;
-
 def get_data(entity):
     result = {};
     if isinstance(entity, basestring):
         config_page = search_config_page(entity);
-        result = data.get_data_from_page(config_page, entity);
+        result = {"collection_name" : config_page['collection_name']};
+        result["root_data"] = data.get_data_from_page(config_page, entity);
     else:
         config_page = search_config_page(entity['url']);
-        result = data.get_data_from_page(config_page, entity['url']);
-#            print result;
+        result = {"collection_name" : config_page['collection_name']};
+        result["root_data"] = data.get_data_from_page(config_page, entity['url']);
+        
         if len(entity['objects']) > 0:
             for obj in entity['objects']:
                 for key, url in obj.iteritems():
                     config_sub_page = search_config_page(url);
-                    for result_obj in result:
+                    for result_obj in result["root_data"]:
                         if result_obj['object_name'] == key:
                             for d in result_obj['data']:
                                 d['sub_data'] = data.get_data_from_page(config_sub_page, url);
-        print result;
     return result;
 
 def get_data_main():
-    result = {};
-    
     for page in config_siblings['pages']:
         if len(page['siblings_urls']) == 0:
-            result = data.get_data(page['url']);
+            result = get_data(page['url']);
+            #Save result to MongoDB
+#            database.insert_many_documents(result['collection_name'], result['root_data']);
         else:
-            result = get_data_multiple_siblings(page['siblings_urls'], 0, 1);
-
-        return result;
+            startPosition = 0;
+            endPosition = 1;
+            for chance in range(startPosition, endPosition + 1):
+                entity = page['siblings_urls'][chance];
+                result = get_data(entity);
+                #Save result to MongoDB
+                #database.insert_one_document(result['collection_name'], result['root_data']);
     
-    #Save data to mongoDB
-    
-
-#Loop pages in config_structure and get data from them and from their siblings based on learned structure
-#for page in config_siblings['pages']:
-#    get_data(page)
-
-get_data(config_siblings['pages'][2]);
+get_data_main()
