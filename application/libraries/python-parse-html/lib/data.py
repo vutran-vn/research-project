@@ -10,7 +10,7 @@ def get_data_from_page(page, url):
     
     #Open this page with BeautifulSoup
     try:
-        request = urllib2.Request(url, headers={'User-Agent' : "Magic Browser"})
+        request = urllib2.Request(url, headers={'User-Agent' : "Browser"})
         p = urllib2.urlopen(request).read()
     except urllib2.HTTPError, e:
         #e.fp.read()
