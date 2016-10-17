@@ -43,13 +43,13 @@ def find_one_document(collection_name, query_dictionary):
     else:
         return collection.find_one();
 
-def find_many_documents(collection_name, query_dictionary):
+def find_many_documents(collection_name, query_dictionary, limit, skip):
     #Access collection and insert data
     collection = db[collection_name];
     if query_dictionary:
-        return collection.find(query_dictionary);
+        return collection.find(query_dictionary).limit(limit).skip(skip);
     else:
-        return collection.find();
+        return collection.find().limit(limit).skip(skip);
     
 def count_document(collection_name):
     #Access collection and insert data
