@@ -55,7 +55,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
                 //Print data to HTML
                 ?>
-                <h3>Company Data</h3>
+                <h3>Service</h3>
                 <table class="table table-bordered">
                     <thead>
                         <tr>
@@ -81,7 +81,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     </tbody>
                 </table>
 
-                <h3>Company Reviews</h3>
+                <h3>Reviews</h3>
                 <table class="table table-bordered">
                     <thead>
                         <tr>
