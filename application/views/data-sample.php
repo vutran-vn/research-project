@@ -124,12 +124,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 </table>
                 <?php
             } else if ($sample_pages[$this->input->post('page')] == "http://www.serchen.com/category/accounting-software/") { ?>
-                <h3>Companies List</h3>
+                <h3>Services List</h3>
                 <table class="table table-bordered">
                     <thead>
                         <tr>
-                            <th>Company Name</th>
-                            <th>Company Service</th>
+                            <th>Service Name</th>
+                            <th>Service Category</th>
                             <th>Last reviewed date</th>
                             <th>Review Number</th>
                         </tr>
