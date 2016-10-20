@@ -51,7 +51,7 @@ with open('../../../data/csv/companies.csv', 'ab') as f1:
     writer1 = csv.writer(f1)
     #Apply for first run
     if runTime == 1:
-        writer1.writerow(['Company Name', 'Company URL', 'Key Features', 'Services', 'About']);
+        writer1.writerow(['Service Name', 'Service URL', 'Service Key Features', 'Service Categories', 'Service Description']);
     for company_data in companies_data:
         com_name = unicodedata.normalize('NFKD', company_data['company_name']).encode('ascii', 'ignore');
         com_url = unicodedata.normalize('NFKD', company_data['company_url']).encode('ascii', 'ignore');
@@ -65,7 +65,7 @@ with open('../../../data/csv/companies_reviews.csv', 'ab') as f2:
     writer2 = csv.writer(f2)
     #Apply for first run
     if runTime == 1:
-        writer2.writerow(['Company Name', 'Company URL', 'Review Name', 'Review Date', 'Review Content']);
+        writer2.writerow(['Service Name', 'Service URL', 'Review Name', 'Review Date', 'Review Content']);
     for company_reviews in companies_reviews:
         for review in company_reviews['reviews']:
             com_name = unicodedata.normalize('NFKD', company_reviews['company_name']).encode('ascii', 'ignore');

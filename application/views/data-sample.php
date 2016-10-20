@@ -59,10 +59,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 <table class="table table-bordered">
                     <thead>
                         <tr>
-                            <th>Company Name</th>
-                            <th>Company URL</th>
-                            <th>Key Features</th>
-                            <th>Services</th>
+                            <th>Service Name</th>
+                            <th>Service URL</th>
+                            <th>Service Key Features</th>
+                            <th>Service Categories</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -85,11 +85,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 <table class="table table-bordered">
                     <thead>
                         <tr>
-                            <th>Company Name</th>
-                            <th>Company URL</th>
-                            <th>User Name</th>
-                            <th>Date</th>
-                            <th>Comment</th>
+                            <th>Service Name</th>
+                            <th>Service URL</th>
+                            <th>Review Name</th>
+                            <th>Review Date</th>
+                            <th>Review Content</th>
                         </tr>
                     </thead>
                     <tbody>
