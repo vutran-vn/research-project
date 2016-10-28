@@ -5,6 +5,7 @@ from lib import data
 from lib import database
 import json
 import re
+import time
 
 settings.init()
 database.init()
@@ -93,9 +94,9 @@ def get_companies_data():
         except ValueError:
             return
     
-    if runTime <= 1251:
-        minNumber = 10 * (runTime - 1)
-        maxNumber = 10 * runTime
+    if runTime <= 501:
+        minNumber = 25 * (runTime - 1)
+        maxNumber = 25 * runTime
 
         #Loop from minNumber to maxNumber 
         for chance in range(minNumber, maxNumber):
@@ -104,6 +105,7 @@ def get_companies_data():
             print result;
             #Save result to MongoDB
             save_to_db(result);
+#            time.sleep(2)
         
         #Save back runTime with increment 1
         runTime = runTime + 1

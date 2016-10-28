@@ -5,9 +5,9 @@ def init():
     #Connect MongoDB Client
     client = MongoClient();
 
-    #Access database. This case is "test"
+    #Access database. This case is "dev"
     global db
-    db = client.test;
+    db = client.dev;
 
 #Access collection (a group of documents) = equivalent of a table in relational database
 
