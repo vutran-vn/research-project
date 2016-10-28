@@ -12,6 +12,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 <div id="supervisors">
                     <strong>Supervisor: </strong> <span>Dr. Farookh Hussain</span><br>
                     <strong>Co-supervisor: </strong> <span>Asma Alkalbani</span>
+                    <strong>Co-supervisor: </strong> <span>Ahmed Ghamry</span>
                 </div>
             </div>
             <div class="col-md-6">
